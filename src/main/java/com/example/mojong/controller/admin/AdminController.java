@@ -44,7 +44,7 @@ public class AdminController {
 
     //모든기록보기
     @GetMapping("/allHistory")
-    public AllHistoryDTO allHistory(Pageable pageable){
+    public HistoryDTO allHistory(Pageable pageable){
         return saleService.allHistory(pageable);
     }
 

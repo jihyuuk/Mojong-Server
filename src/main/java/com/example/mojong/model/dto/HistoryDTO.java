@@ -10,7 +10,7 @@ import java.util.List;
 
 @Getter @Setter
 @NoArgsConstructor
-public class AllHistoryDTO {
+public class HistoryDTO {
 
     private List<Sale> content;
     private boolean empty;
@@ -20,7 +20,7 @@ public class AllHistoryDTO {
     private int totalPages;
     private Long totalElements;
 
-    public AllHistoryDTO(Page<Sale> page) {
+    public HistoryDTO(Page<Sale> page) {
         content = page.getContent();
         empty = page.isEmpty();
         first = page.isFirst();

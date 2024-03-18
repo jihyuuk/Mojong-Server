@@ -11,8 +11,8 @@ import java.util.List;
 @Repository
 public interface SaleRepository extends JpaRepository<Sale, Long> {
 
-    //기록보기
-    List<Sale> findAllByUsernameOrderByIdDesc(String username);
+    //유저기록보기
+    Page<Sale> findAllByUsername(String username,Pageable pageable);
 
     //모든기록보기
     Page<Sale> findAll(Pageable pageable);

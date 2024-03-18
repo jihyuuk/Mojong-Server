@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Formatter;
 import java.util.List;
 
 @Getter @Setter
@@ -20,5 +21,6 @@ public class SaleDTO {
     private int finalPrice;
     //결제수단
     private String pay;
-
+    //영수증 출력여부
+    private boolean print;
 }
