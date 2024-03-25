@@ -62,10 +62,10 @@ public class SecurityConfig{
 
         //경로별 인가 작업
         http.authorizeHttpRequests((auth) -> auth
-                .anyRequest().permitAll());
-                        //.requestMatchers("/login", "/join").permitAll()
-                        //.requestMatchers("/admin/*").hasRole("ADMIN")
-                        //.anyRequest().authenticated());
+                //.anyRequest().permitAll());
+                        .requestMatchers("/login", "/join", "/ws").permitAll()
+                        .requestMatchers("/admin/*").hasRole("ADMIN")
+                        .anyRequest().authenticated());
         
         //커스텀 jwt필터 적용
         http
