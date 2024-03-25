@@ -1,4 +1,4 @@
-package com.example.mojong.controller;
+package com.example.mojong.controller.login;
 
 import com.example.mojong.model.dto.JoinDTO;
 import com.example.mojong.service.UserService;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-public class JoinController {
+public class LoginController {
 
     private final UserService userService;
 
