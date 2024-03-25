@@ -35,14 +35,14 @@ public class JWTUtil {
 
     
     //jwt만들기
-    public String createJwt(String username, String role, Long expiredMs) {
+    public String createJwt(String username, String role) {
 
         return Jwts.builder()
                 .setHeaderParam("typ", "JWT")
                 .claim("username", username)
                 .claim("role", role)
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + expiredMs))
+                .expiration(new Date(System.currentTimeMillis() + 600*1000L))
                 .signWith(secretKey)
                 .compact();
     }

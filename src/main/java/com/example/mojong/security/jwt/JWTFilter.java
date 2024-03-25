@@ -51,7 +51,7 @@ public class JWTFilter extends OncePerRequestFilter {
             jwtUtil.isExpired(token);
         }catch (ExpiredJwtException e){
             System.out.println("유효기간만료됨 후처리 시작");
-
+            e.printStackTrace();
             //만료 토큰에서 userName 추출하기
             String username = e.getClaims().get("username", String.class);
             //db username 으로 조회
@@ -61,7 +61,7 @@ public class JWTFilter extends OncePerRequestFilter {
             if(findUser != null && findUser.isEnabled()){
                 //유저 enabled시 새토큰발급해줌
                 System.out.println("새 토큰발급");
-                String reToken = jwtUtil.createJwt(username, findUser.getRole().name(), 60+60*1000L);
+                String reToken = jwtUtil.createJwt(username, findUser.getRole().name());
                 response.addHeader("Authorization", "Bearer " + token);
                 response.setStatus(201);
                 //여기
