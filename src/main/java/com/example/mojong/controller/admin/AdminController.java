@@ -31,13 +31,13 @@ public class AdminController {
     }
 
     //회원 차단,차단해제
-    @PostMapping("/block")
+    @PostMapping("/members/block")
     public ResponseEntity<String> block(@RequestBody BlockDTO blockDTO){
         return userService.blocking(blockDTO);
     }
 
     //가입승인
-    @PostMapping("/approval")
+    @PostMapping("/members/approval")
     public ResponseEntity<String> block(@RequestBody ApprovalDTO approvalDTO){
         return userService.approval(approvalDTO);
     }
