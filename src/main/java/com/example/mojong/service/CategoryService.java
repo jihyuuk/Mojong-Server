@@ -1,6 +1,8 @@
 package com.example.mojong.service;
 
 import com.example.mojong.model.dto.CategoryDTO;
+import com.example.mojong.model.dto.category.CategoryParam;
+import com.example.mojong.model.dto.category.CategorySeqDTO;
 import com.example.mojong.model.entity.Category;
 import com.example.mojong.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +27,9 @@ public class CategoryService {
     }
 
     //카테고리 생성
-    public ResponseEntity<String> create(String name) {
+    public ResponseEntity<String> create(CategoryParam categoryParam) {
+
+        String name = categoryParam.getName();
 
         //존재,빈값 확인
         if(name == null || name.trim().isEmpty()){
@@ -60,34 +64,36 @@ public class CategoryService {
 
     //카테고리 수정
     @Transactional
-    public ResponseEntity<String> update(CategoryDTO dto) {
+    public ResponseEntity<String> update(Long id, CategoryParam categoryParam) {
 
-        Category category = categoryRepository.findById(dto.getId()).orElse(null);
+        String name = categoryParam.getName();
+
+        Category category = categoryRepository.findById(id).orElse(null);
 
         //없는 id 인경우
         if(category == null) return ResponseEntity.notFound().build();
 
         //중복확인
-        if(categoryRepository.existsByNameAndEnabledTrue(dto.getName())){
+        if(categoryRepository.existsByNameAndEnabledTrue(name)){
             return ResponseEntity.status(HttpStatus.CONFLICT).body("중복된 카테고리명 입니다.");
         }
 
         //이름변경
-        category.changeName(dto.getName());
+        category.changeName(name);
 
         return ResponseEntity.ok("수정 성공");
     }
 
     //카테고리 순서 변경
     @Transactional
-    public ResponseEntity<String> changeSeq(List<CategoryDTO> dtos) {
+    public ResponseEntity<String> changeSeq(CategorySeqDTO dto) {
 
         //카테고리 불러오기
         List<Category> categories = categoryRepository.findAllByEnabledTrue();
 
         int size = categories.size();
 
-        if (dtos.size() != size){
+        if (dto.getCategoryIds().size() != size){
             return ResponseEntity.badRequest().body("누락된 카테고리가존재합니다.");
         }
 
@@ -95,8 +101,8 @@ public class CategoryService {
         Map<Long, Category> map = categories.stream().collect(Collectors.toMap(Category::getId, category -> category));
 
         //적용
-        for (CategoryDTO dto : dtos) {
-            map.get(dto.getId()).changeSeq(size--);
+        for (Long id : dto.getCategoryIds()) {
+            map.get(id).changeSeq(size--);
         }
 
         return ResponseEntity.ok("순서 변경 성공");

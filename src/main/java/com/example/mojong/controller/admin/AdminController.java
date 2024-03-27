@@ -1,6 +1,8 @@
 package com.example.mojong.controller.admin;
 
 import com.example.mojong.model.dto.*;
+import com.example.mojong.model.dto.category.CategoryParam;
+import com.example.mojong.model.dto.category.CategorySeqDTO;
 import com.example.mojong.model.dto.item.ItemParam;
 import com.example.mojong.model.dto.item.ItemSeqDTO;
 import com.example.mojong.service.CategoryService;
@@ -44,35 +46,34 @@ public class AdminController {
         return userService.approval(approvalDTO);
     }
 
-    //모든기록보기
+    //모든기록보기===================================================================================
     @GetMapping("/allHistory")
     public HistoryDTO allHistory(Pageable pageable){
         return saleService.allHistory(pageable);
     }
 
-    //카테고리 생성
-    @PostMapping("/categories")
-    public ResponseEntity<String> createCategory(@RequestBody Map<String, String> data){
-        return categoryService.create(data.get("name"));
-    }
-
-    //카테고리 삭제
-    @DeleteMapping("/categories")
-    public ResponseEntity<String> deleteCategory(@RequestBody Map<String, Long> data){
-        System.out.println("data = " + data.get("id"));
-        return categoryService.delete(data.get("id"));
+    //카테고리 생성=======================================================================================
+    @PostMapping("/category")
+    public ResponseEntity<String> createCategory(@RequestBody CategoryParam categoryParam){
+        return categoryService.create(categoryParam);
     }
 
     //카테고리 수정
-    @PutMapping("/categories")
-    public ResponseEntity<String> updateCategory(@RequestBody CategoryDTO dto){
-        return categoryService.update(dto);
+    @PutMapping("/category/{id}")
+    public ResponseEntity<String> updateCategory(@PathVariable Long id, @RequestBody CategoryParam categoryParam){
+        return categoryService.update(id, categoryParam);
+    }
+
+    //카테고리 삭제
+    @DeleteMapping("/category/{id}")
+    public ResponseEntity<String> deleteCategory(@PathVariable Long id){
+        return categoryService.delete(id);
     }
 
     //카테고리 순서 변경
-    @PutMapping("/categories/seqChange")
-    public ResponseEntity<String> changeSeqCategory(@RequestBody List<CategoryDTO> dtos){
-        return categoryService.changeSeq(dtos);
+    @PutMapping("/category/seqChange")
+    public ResponseEntity<String> changeSeqCategory(@RequestBody CategorySeqDTO categorySeqDTO){
+        return categoryService.changeSeq(categorySeqDTO);
     }
     
     //상품 추가=====================================================================================
