@@ -57,18 +57,14 @@ public class UserService {
     }
 
     //가입승인
-    public ResponseEntity<String> approval(ApprovalDTO approvalDTO) {
-        Boolean approve = approvalDTO.getApprove();
-        Long userId = approvalDTO.getUserId();
+    public ResponseEntity<String> approval(Long id) {
+            userRepository.userApprove(id, LocalDateTime.now());
+        return ResponseEntity.ok().body("회원가입 승인 성공!");
+    }
 
-        int row = 0;
-
-        if(approve){
-            row = userRepository.userApprove(userId, LocalDateTime.now());
-        }else{
-            row = userRepository.userReject(userId);
-        }
-
-        return row > 0 ? ResponseEntity.ok().body("요청성공") : ResponseEntity.notFound().build();
+    //가입거부
+    public ResponseEntity<String> disApproval(Long id) {
+        userRepository.userReject(id);
+        return ResponseEntity.ok().body("회원가입 거부 성공!");
     }
 }

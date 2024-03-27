@@ -15,9 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Map;
-
 @RestController
 @RequiredArgsConstructor
 @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -41,9 +38,14 @@ public class AdminController {
     }
 
     //가입승인
-    @PostMapping("/members/approval")
-    public ResponseEntity<String> block(@RequestBody ApprovalDTO approvalDTO){
-        return userService.approval(approvalDTO);
+    @PutMapping("/members/{id}/approval")
+    public ResponseEntity<String> memberApproval(@PathVariable Long id){
+        return userService.approval(id);
+    }
+    //가입거부
+    @DeleteMapping("/members/{id}/disApproval")
+    public ResponseEntity<String> memberDisApproval(@PathVariable Long id){
+        return userService.disApproval(id);
     }
 
     //모든기록보기===================================================================================
