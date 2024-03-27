@@ -1,6 +1,6 @@
 package com.example.mojong.model.entity;
 
-import com.example.mojong.model.dto.ItemDTO;
+import com.example.mojong.model.dto.item.ItemParam;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -39,11 +39,11 @@ public class Item {
         enabled = true;
     }
 
-    public Item(Category category, ItemDTO itemDTO){
+    public Item(Category category, ItemParam itemParam){
         this.category = category;
-        this.name = itemDTO.getName();
-        this.description = itemDTO.getDescription();
-        this.price = itemDTO.getPrice();
+        this.name = itemParam.getName();
+        this.description = itemParam.getDescription();
+        this.price = itemParam.getPrice();
         enabled = true;
     }
 
@@ -52,7 +52,7 @@ public class Item {
         enabled = false;
     }
 
-    public void update(Category category, ItemDTO itemDTO) {
+    public void update(Category category, ItemParam itemParam) {
 
         //카테고리 변경 있을때
         if(this.category.getId() != category.getId()){
@@ -62,9 +62,9 @@ public class Item {
             this.seq = 0;
         }
 
-        this.name = itemDTO.getName();
-        this.description = itemDTO.getDescription();
-        this.price = itemDTO.getPrice();
+        this.name = itemParam.getName();
+        this.description = itemParam.getDescription();
+        this.price = itemParam.getPrice();
     }
 
     public void seqChange(int seq){

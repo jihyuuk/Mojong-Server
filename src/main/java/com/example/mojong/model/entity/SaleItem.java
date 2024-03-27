@@ -1,6 +1,5 @@
 package com.example.mojong.model.entity;
 
-import com.example.mojong.model.dto.ItemParam;
 import com.example.mojong.model.dto.sale.SaleItemDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

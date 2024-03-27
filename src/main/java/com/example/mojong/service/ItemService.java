@@ -1,7 +1,7 @@
 package com.example.mojong.service;
 
-import com.example.mojong.model.dto.ItemDTO;
-import com.example.mojong.model.dto.ItemSeqDTO;
+import com.example.mojong.model.dto.item.ItemParam;
+import com.example.mojong.model.dto.item.ItemSeqDTO;
 import com.example.mojong.model.entity.Category;
 import com.example.mojong.model.entity.Item;
 import com.example.mojong.repository.CategoryRepository;
@@ -25,7 +25,7 @@ public class ItemService {
     private final CategoryRepository categoryRepository;
 
     //상품 추가
-    public ResponseEntity<String> addItem(ItemDTO dto) {
+    public ResponseEntity<String> addItem(ItemParam dto) {
 
         //빈값확인
         if(dto == null || dto.getName() == null || dto.getPrice() == 0 || dto.getCategoryId()==null){
@@ -70,15 +70,15 @@ public class ItemService {
 
     //상품 수정
     @Transactional
-    public ResponseEntity<String> updateItem(ItemDTO dto) {
+    public ResponseEntity<String> updateItem(Long id, ItemParam dto) {
 
         //빈값확인
-        if(dto == null || dto.getName() == null || dto.getPrice() == 0 || dto.getId() == null || dto.getCategoryId()==null){
+        if(dto == null || dto.getName() == null || dto.getPrice() == 0 || id == null || dto.getCategoryId()==null){
             return ResponseEntity.badRequest().body("값을 입력해주세요");
         }
 
         //상품존재확인
-        Item item = itemRepository.findById(dto.getId()).orElse(null);
+        Item item = itemRepository.findById(id).orElse(null);
         if(item == null){
             return  ResponseEntity.badRequest().body("존재하지 않는 상품입니다.");
         }

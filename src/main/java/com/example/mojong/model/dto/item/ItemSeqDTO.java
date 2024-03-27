@@ -1,4 +1,4 @@
-package com.example.mojong.model.dto;
+package com.example.mojong.model.dto.item;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

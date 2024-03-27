@@ -1,6 +1,8 @@
 package com.example.mojong.controller.admin;
 
 import com.example.mojong.model.dto.*;
+import com.example.mojong.model.dto.item.ItemParam;
+import com.example.mojong.model.dto.item.ItemSeqDTO;
 import com.example.mojong.service.CategoryService;
 import com.example.mojong.service.ItemService;
 import com.example.mojong.service.SaleService;
@@ -73,38 +75,28 @@ public class AdminController {
         return categoryService.changeSeq(dtos);
     }
     
-    //상품 추가
+    //상품 추가=====================================================================================
     @PostMapping("/item")
-    public ResponseEntity<String> createItem(@RequestBody ItemDTO itemDTO){
-        System.out.println("itemDTO = " + itemDTO.getCategoryId());
-        System.out.println("itemDTO = " + itemDTO.getName());
-        System.out.println("itemDTO = " + itemDTO.getDescription());
-        System.out.println("itemDTO = " + itemDTO.getPrice());
-        return itemService.addItem(itemDTO);
+    public ResponseEntity<String> createItem(@RequestBody ItemParam itemParam){
+        return itemService.addItem(itemParam);
     }
 
     //상품 수정
-    @PutMapping("/item")
-    public ResponseEntity<String> updateItem(@RequestBody ItemDTO itemDTO){
-        return itemService.updateItem(itemDTO);
+    @PutMapping("/item/{id}")
+    public ResponseEntity<String> updateItem(@PathVariable Long id, @RequestBody ItemParam itemParam){
+        return itemService.updateItem(id, itemParam);
     }
 
     //상품 삭제
-    @DeleteMapping("/item")
-    public ResponseEntity<String> deleteItem(@RequestBody Map<String,Long> data){
-        return itemService.deleteItem(data.get("id"));
+    @DeleteMapping("/item/{id}")
+    public ResponseEntity<String> deleteItem(@PathVariable Long id){
+        return itemService.deleteItem(id);
     }
 
     //상품 순서변경
     @PutMapping("/item/seqChange")
     public ResponseEntity<String> changeSeqItem(@RequestBody ItemSeqDTO itemSeqDTO){
-        System.out.println(itemSeqDTO.getCategoryId()+"ㅋ테고리 아이디");
-        for (Long itemId : itemSeqDTO.getItemIds()) {
-            System.out.println("itemId = " + itemId);
-        }
         return itemService.seqChange(itemSeqDTO);
     }
-
-
 
 }

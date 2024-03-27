@@ -1,4 +1,4 @@
-package com.example.mojong.model.dto;
+package com.example.mojong.model.dto.item;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -6,9 +6,8 @@ import lombok.Setter;
 
 @Getter @Setter
 @NoArgsConstructor
-public class ItemDTO {
+public class ItemParam {
 
-   private Long id;
    private Long categoryId;
    private String name;
    private String description;
