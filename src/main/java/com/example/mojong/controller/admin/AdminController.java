@@ -31,10 +31,16 @@ public class AdminController {
         return userService.getMembers();
     }
 
-    //회원 차단,차단해제
-    @PostMapping("/members/block")
-    public ResponseEntity<String> block(@RequestBody BlockDTO blockDTO){
-        return userService.blocking(blockDTO);
+    //회원 차단
+    @PutMapping("/members/{id}/block")
+    public ResponseEntity<String> memberBlock(@PathVariable Long id){
+        return userService.block(id);
+    }
+
+    //차단해제
+    @PutMapping("/members/{id}/unBlock")
+    public ResponseEntity<String> memberUnBlock(@PathVariable Long id){
+        return userService.unBlock(id);
     }
 
     //가입승인
@@ -42,6 +48,7 @@ public class AdminController {
     public ResponseEntity<String> memberApproval(@PathVariable Long id){
         return userService.approval(id);
     }
+
     //가입거부
     @DeleteMapping("/members/{id}/disApproval")
     public ResponseEntity<String> memberDisApproval(@PathVariable Long id){

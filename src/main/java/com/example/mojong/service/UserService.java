@@ -47,14 +47,17 @@ public class UserService {
     }
 
     //회원차단
-    public ResponseEntity<String> blocking(BlockDTO blockDTO){
-        Boolean enabled = !blockDTO.getBlocking();
-        Long userId = blockDTO.getUserId();
-
-        int row = userRepository.userEnabled(userId, enabled);
-        System.out.println("row = " + row);
-        return row > 0 ? ResponseEntity.ok().body("사용자 활성화 상태가 변경되었습니다.") : ResponseEntity.notFound().build();
+    public ResponseEntity<String> block(Long id){
+        userRepository.userEnabled(id, false);
+        return ResponseEntity.ok().body("회원 차단 성공!");
     }
+
+    //회원차단 해제
+    public ResponseEntity<String> unBlock(Long id){
+        userRepository.userEnabled(id, true);
+        return ResponseEntity.ok().body("회원 차단 해제");
+    }
+
 
     //가입승인
     public ResponseEntity<String> approval(Long id) {
