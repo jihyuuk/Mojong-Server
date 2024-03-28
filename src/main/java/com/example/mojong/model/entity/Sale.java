@@ -22,7 +22,7 @@ public class Sale {
 
     private String firstItem;
 
-    private int count;
+    private int countItem;
 
     private int totalPrice;
 
@@ -32,7 +32,7 @@ public class Sale {
 
     private String pay;
 
-    @JsonFormat(pattern = "YYYY.MM.dd HH:mm")
+
     private LocalDateTime createdDate;
 
     @PrePersist

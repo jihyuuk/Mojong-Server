@@ -1,6 +1,6 @@
 package com.example.mojong.service;
 
-import com.example.mojong.model.dto.HistoryDTO;
+import com.example.mojong.model.dto.history.HistoryDTO;
 import com.example.mojong.model.dto.sale.SaleDTO;
 import com.example.mojong.model.dto.sale.SaleDetailDTO;
 import com.example.mojong.model.entity.Sale;

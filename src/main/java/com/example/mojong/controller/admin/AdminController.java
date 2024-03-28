@@ -3,6 +3,7 @@ package com.example.mojong.controller.admin;
 import com.example.mojong.model.dto.*;
 import com.example.mojong.model.dto.category.CategoryParam;
 import com.example.mojong.model.dto.category.CategorySeqDTO;
+import com.example.mojong.model.dto.history.HistoryDTO;
 import com.example.mojong.model.dto.item.ItemParam;
 import com.example.mojong.model.dto.item.ItemSeqDTO;
 import com.example.mojong.service.CategoryService;

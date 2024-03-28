@@ -1,7 +1,5 @@
 package com.example.mojong.service;
 
-import com.example.mojong.model.dto.ApprovalDTO;
-import com.example.mojong.model.dto.BlockDTO;
 import com.example.mojong.model.dto.JoinDTO;
 import com.example.mojong.model.dto.MembersDTO;
 import com.example.mojong.model.entity.User;
@@ -12,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor

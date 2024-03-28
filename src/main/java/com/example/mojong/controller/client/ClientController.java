@@ -1,17 +1,15 @@
 package com.example.mojong.controller.client;
 
-import com.example.mojong.model.dto.HistoryDTO;
+import com.example.mojong.model.dto.history.HistoryDTO;
 import com.example.mojong.model.dto.InitDataDTO;
 import com.example.mojong.model.dto.sale.SaleDTO;
 import com.example.mojong.model.dto.sale.SaleDetailDTO;
 import com.example.mojong.model.entity.Category;
-import com.example.mojong.model.entity.Sale;
 import com.example.mojong.service.CategoryService;
 import com.example.mojong.service.ReceiptService;
 import com.example.mojong.service.SaleService;
 import com.example.mojong.websocket.WebSocketHandler;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
