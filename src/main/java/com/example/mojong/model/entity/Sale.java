@@ -32,7 +32,6 @@ public class Sale {
 
     private String pay;
 
-
     private LocalDateTime createdDate;
 
     @PrePersist
@@ -43,7 +42,7 @@ public class Sale {
     public Sale(SaleDTO saleDTO, String username) {
         this.username = username;
         firstItem = saleDTO.getItems().get(0).getName();
-        count = saleDTO.getItems().size();
+        countItem = saleDTO.getItems().size();
         totalPrice = saleDTO.getTotalPrice();
         salePrice = saleDTO.getSalePrice();
         finalPrice = saleDTO.getFinalPrice();

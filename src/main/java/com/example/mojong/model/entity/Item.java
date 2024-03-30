@@ -27,8 +27,10 @@ public class Item {
 
     private int price;
 
+    @JsonIgnore
     private int seq;
 
+    @JsonIgnore
     private boolean enabled;
 
     public Item(Category category, String name, String description, int price) {
