@@ -17,15 +17,17 @@ public class User {
 
     @Id @GeneratedValue
     @Column(name = "user_id")
-    Long id;
+    private Long id;
 
-    String username;
+    private String username;
     @JsonIgnore
-    String password;
+    private String password;
 
     @Enumerated(EnumType.STRING)
-    ROLE role;
+    private ROLE role;
+
     private boolean enabled;
+
     //가입신청 승인여부
     @JsonIgnore
     private boolean approved;
