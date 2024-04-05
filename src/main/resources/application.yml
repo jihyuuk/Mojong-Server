@@ -11,6 +11,10 @@ spring:
       ddl-auto: create
     show-sql: true
 
+  websocket:
+    servlet:
+      timeout: 43200000
+
   data:
     web:
       pageable:
