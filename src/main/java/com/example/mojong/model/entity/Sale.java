@@ -32,6 +32,7 @@ public class Sale {
 
     private String pay;
 
+    @JsonFormat(pattern = "YYYY.MM.dd HH:mm")
     private LocalDateTime createdDate;
 
     @PrePersist

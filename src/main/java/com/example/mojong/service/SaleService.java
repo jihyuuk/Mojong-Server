@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
@@ -25,10 +26,11 @@ public class SaleService {
 
     private final SaleRepository saleRepository;
     private final SaleItemRepository saleItemRepository;
+    private final ReceiptService receiptService;
 
     //판매하기
     @Transactional
-    public Long sale(SaleDTO saleDTO, String username){
+    public ResponseEntity<String> sale(SaleDTO saleDTO, String username){
 
         //검증
         if(username == null){
@@ -46,8 +48,17 @@ public class SaleService {
         saleDTO.getItems().forEach(saleItemDTO -> {
             saleItemRepository.save(new SaleItem(sale,saleItemDTO));
         });
+        
+        //프린터 적용
+        if(saleDTO.isPrint()){
+            ResponseEntity<String> printRes = receiptService.print(sale.getId());
+            //프린트 실패시
+            if (printRes.getStatusCode().isError()){
+                return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body("영수증 출력실패");
+            }
+        }
 
-        return sale.getId();
+        return ResponseEntity.status(HttpStatus.CREATED).body("판매 성공!");
     }
 
     //간단판매기록
