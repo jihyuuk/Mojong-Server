@@ -13,13 +13,6 @@ public class ItemController {
 
     private final InIt inIt;
 
-//    @GetMapping("/itemList")
-//    public List<ItemDTO> getItems(){
-//        log.info("itemsList 호출됨");
-//        List<ItemDTO> itemList = itemService.findAll();
-//        return itemList;
-//    }
-
     @PostConstruct
     public void run(){
         inIt.init();

@@ -45,17 +45,14 @@ public class User {
         this.username = joinDTO.getUsername();
         this.password = joinDTO.getPassword();
         role = ROLE.ROLE_USER;
-        //실제론 false로바꿔야함
         enabled = false;
         approved = false;
     }
 
-    //테스트용
     public User(String username, String password, ROLE role,boolean enabled, boolean approved) {
         this.username = username;
         this.password = password;
         this.role = role;
-        //실제론 false로바꿔야함
         this.enabled = enabled;
         this.approved = approved;
     }

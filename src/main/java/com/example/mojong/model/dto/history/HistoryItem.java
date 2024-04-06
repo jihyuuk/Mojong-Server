@@ -2,9 +2,14 @@ package com.example.mojong.model.dto.history;
 
 import com.example.mojong.model.entity.Sale;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
+@Getter @Setter
+@NoArgsConstructor
 public class HistoryItem {
     /*
     1.제목 (오이 외 n개)

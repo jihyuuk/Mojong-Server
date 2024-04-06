@@ -1,7 +1,7 @@
 package com.example.mojong.service;
 
 import com.example.mojong.model.dto.JoinDTO;
-import com.example.mojong.model.dto.MembersDTO;
+import com.example.mojong.model.dto.login.MembersDTO;
 import com.example.mojong.model.entity.User;
 import com.example.mojong.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
