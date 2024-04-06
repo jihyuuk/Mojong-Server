@@ -1,11 +1,11 @@
 package com.example.mojong.controller.admin;
 
-import com.example.mojong.model.dto.*;
 import com.example.mojong.model.dto.category.CategoryParam;
 import com.example.mojong.model.dto.category.CategorySeqDTO;
 import com.example.mojong.model.dto.history.HistoryDTO;
 import com.example.mojong.model.dto.item.ItemParam;
 import com.example.mojong.model.dto.item.ItemSeqDTO;
+import com.example.mojong.model.dto.login.MembersDTO;
 import com.example.mojong.service.CategoryService;
 import com.example.mojong.service.ItemService;
 import com.example.mojong.service.SaleService;
@@ -15,6 +15,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -51,7 +53,7 @@ public class AdminController {
     }
 
     //가입거부
-    @DeleteMapping("/members/{id}/disApproval")
+    @PutMapping("/members/{id}/disApproval")
     public ResponseEntity<String> memberDisApproval(@PathVariable Long id){
         return userService.disApproval(id);
     }
@@ -82,8 +84,8 @@ public class AdminController {
 
     //카테고리 순서 변경
     @PutMapping("/category/seqChange")
-    public ResponseEntity<String> changeSeqCategory(@RequestBody CategorySeqDTO categorySeqDTO){
-        return categoryService.changeSeq(categorySeqDTO);
+    public ResponseEntity<String> changeSeqCategory(@RequestBody List<CategorySeqDTO> seqDTOS){
+        return categoryService.changeSeq(seqDTOS);
     }
     
     //상품 추가=====================================================================================

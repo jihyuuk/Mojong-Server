@@ -84,14 +84,14 @@ public class CategoryService {
 
     //카테고리 순서 변경
     @Transactional
-    public ResponseEntity<String> changeSeq(CategorySeqDTO dto) {
+    public ResponseEntity<String> changeSeq(List<CategorySeqDTO> seqDTOS) {
 
         //카테고리 불러오기
         List<Category> categories = categoryRepository.findAllByEnabledTrue();
 
         int size = categories.size();
 
-        if (dto.getCategoryIds().size() != size){
+        if (seqDTOS.size() != size){
             return ResponseEntity.badRequest().body("누락된 카테고리가존재합니다.");
         }
 
@@ -99,8 +99,8 @@ public class CategoryService {
         Map<Long, Category> map = categories.stream().collect(Collectors.toMap(Category::getId, category -> category));
 
         //적용
-        for (Long id : dto.getCategoryIds()) {
-            map.get(id).changeSeq(size--);
+        for (CategorySeqDTO dto : seqDTOS) {
+            map.get(dto.getId()).changeSeq(size--);
         }
 
         return ResponseEntity.ok("순서 변경 성공");

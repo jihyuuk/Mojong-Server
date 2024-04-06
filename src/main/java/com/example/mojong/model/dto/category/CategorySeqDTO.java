@@ -4,12 +4,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter @Setter
 @NoArgsConstructor
 public class CategorySeqDTO {
 
-    private List<Long> CategoryIds;
+    private Long id;
+    private String name;
 
 }
