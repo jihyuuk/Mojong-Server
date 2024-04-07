@@ -42,7 +42,7 @@ public class JWTUtil {
                 .claim("username", username)
                 .claim("role", role)
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 600*1000L))
+                .expiration(new Date(System.currentTimeMillis() + 90*24*60*60*1000L)) //3달
                 .signWith(secretKey)
                 .compact();
     }
