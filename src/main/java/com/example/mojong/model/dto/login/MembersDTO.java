@@ -1,4 +1,4 @@
-package com.example.mojong.model.dto;
+package com.example.mojong.model.dto.login;
 
 import com.example.mojong.model.entity.User;
 import lombok.Getter;
