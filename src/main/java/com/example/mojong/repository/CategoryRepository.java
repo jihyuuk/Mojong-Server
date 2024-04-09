@@ -12,7 +12,7 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
 
     Boolean existsByNameAndEnabledTrue(String name);
 
-    @Query("SELECT c FROM Category c JOIN FETCH c.items i WHERE c.enabled = true And i.enabled = true ORDER BY c.seq DESC, c.id ASC, i.seq DESC, i.id ASC")
+    @Query("SELECT c FROM Category c LEFT JOIN FETCH c.items i WHERE c.enabled = true And  (i.enabled = true OR i IS NULL) ORDER BY c.seq DESC, c.id ASC, i.seq DESC, i.id ASC")
     List<Category> findAllCustom();
 
 }
