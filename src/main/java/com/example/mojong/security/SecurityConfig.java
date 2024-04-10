@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -20,14 +21,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 @RequiredArgsConstructor
 public class SecurityConfig{
 
     private final AuthenticationConfiguration authenticationConfiguration;
     private final JWTUtil jwtUtil;
     private final UserService userService;
-
-
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception{
@@ -62,9 +62,7 @@ public class SecurityConfig{
 
         //경로별 인가 작업
         http.authorizeHttpRequests((auth) -> auth
-                //.anyRequest().permitAll());
-                        .requestMatchers("/login", "/join", "/ws","/login/auto").permitAll()
-                        .requestMatchers("/admin/*").hasRole("ADMIN")
+                        .requestMatchers("/login", "/join").permitAll()
                         .anyRequest().authenticated());
         
         //커스텀 jwt필터 적용
