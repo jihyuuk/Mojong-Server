@@ -1,5 +1,7 @@
 package com.example.mojong.service;
 
+import com.example.mojong.model.dto.AllTodaySale;
+import com.example.mojong.model.dto.TodaySaleDTO;
 import com.example.mojong.model.dto.history.HistoryDTO;
 import com.example.mojong.model.dto.sale.SaleDTO;
 import com.example.mojong.model.dto.sale.SaleDetailDTO;
@@ -78,5 +80,17 @@ public class SaleService {
     public HistoryDTO allHistory(Pageable pageable){
         Page<Sale> page = saleRepository.findAll(PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").descending()));
         return new HistoryDTO(page);
+    }
+
+    //오늘의 개인 판매 정보
+    public TodaySaleDTO myTodaySale(String name) {
+        return saleRepository.findMyTodaySale(name);
+    }
+
+    //오늘의 전체 판매 정보
+    public AllTodaySale allTodaySale(String name) {
+        TodaySaleDTO myTodaySale = saleRepository.findMyTodaySale(name);
+        TodaySaleDTO allTodaySale = saleRepository.findAllTodaySale();
+        return new AllTodaySale(myTodaySale, allTodaySale);
     }
 }

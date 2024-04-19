@@ -1,5 +1,6 @@
 package com.example.mojong.controller.client;
 
+import com.example.mojong.model.dto.TodaySaleDTO;
 import com.example.mojong.model.dto.history.HistoryDTO;
 import com.example.mojong.model.dto.sale.SaleDTO;
 import com.example.mojong.model.dto.sale.SaleDetailDTO;
@@ -27,6 +28,12 @@ public class ClientController {
     @GetMapping("/mojongs")
     public List<Category> items(){
         return categoryService.getCategories();
+    }
+
+    //오늘의 개인 판매 기록
+    @GetMapping("/todaySale")
+    public TodaySaleDTO today(Authentication authentication){
+        return saleService.myTodaySale(authentication.getName());
     }
 
     //판매

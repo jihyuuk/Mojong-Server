@@ -1,5 +1,7 @@
 package com.example.mojong.controller.admin;
 
+import com.example.mojong.model.dto.AllTodaySale;
+import com.example.mojong.model.dto.TodaySaleDTO;
 import com.example.mojong.model.dto.category.CategoryParam;
 import com.example.mojong.model.dto.category.CategorySeqDTO;
 import com.example.mojong.model.dto.history.HistoryDTO;
@@ -14,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,6 +35,12 @@ public class AdminController {
     @GetMapping("/members")
     public MembersDTO members(){
         return userService.getMembers();
+    }
+
+    //오늘의 천체 판매 기록
+    @GetMapping("/allTodaySale")
+    public AllTodaySale today(Authentication authentication){
+        return saleService.allTodaySale(authentication.getName());
     }
 
     //회원 차단
