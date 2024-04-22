@@ -50,7 +50,7 @@ public class SaleService {
         saleDTO.getItems().forEach(saleItemDTO -> {
             saleItemRepository.save(new SaleItem(sale,saleItemDTO));
         });
-        
+
         //프린터 적용
         if(saleDTO.isPrint()){
             ResponseEntity<String> printRes = receiptService.print(sale.getId());
@@ -65,7 +65,7 @@ public class SaleService {
 
     //간단판매기록
     public HistoryDTO history(Pageable pageable, String username){
-        Page<Sale> page = saleRepository.findAllByUsername(username, PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").descending()));
+        Page<Sale> page = saleRepository.findAllByUsername(username, PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("createdDate").descending()));
         return new HistoryDTO(page);
     }
 
@@ -78,7 +78,7 @@ public class SaleService {
 
     //모든판매기록
     public HistoryDTO allHistory(Pageable pageable){
-        Page<Sale> page = saleRepository.findAll(PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").descending()));
+        Page<Sale> page = saleRepository.findAll(PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("createdDate").descending()));
         return new HistoryDTO(page);
     }
 
